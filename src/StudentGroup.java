@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class StudentGroup implements StudentArrayOperation {
 
+	private static final Exception IllegalArgumentException = null;
 	private Student[] students;
 	
 	/**
@@ -32,7 +33,12 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void setStudents(Student[] students) {
 		if(students==null) {
-			throw IllegalArgumentException;
+			try {
+				throw IllegalArgumentException;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else
 			this.students = students;
@@ -41,7 +47,12 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public Student getStudent(int index) {
 		if(index>students.length-1 || index < 0)
-			throw IllegalArgumentException;
+			try {
+				throw IllegalArgumentException;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 		return students[index];
 	}
@@ -49,11 +60,21 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void setStudent(Student student, int index) {
 		 if(student==null) {
-		 	 throw IllegalArgumentException; 
+		 	 try {
+				throw IllegalArgumentException;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 		 }
 		 else {
 		 	 if(index<0 || index>students.length-1) {
-		 		 throw IllegalArgumentException;
+		 		 try {
+					throw IllegalArgumentException;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		 	 }
 		 	 else
 		 		 students[index]=student;
@@ -63,25 +84,41 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void addFirst(Student student) {
 		if(student==null) {
-		 	 throw IllegalArgumentException; 
-		 }
-		 else {
-		 	 if(index<0 || index>students.length-1) {
-		 		 throw IllegalArgumentException;
-		 	 }
-		 	 else {
-		 	 	 Students tmpStudent = new Student();
-		 	     students[students.length+1]=tmpStudent;
-		 	     for(int i=students.length-1;i>=0;i--){
-		 	 	     students[i]=students[i-1];
-		 	     } 
-		 	 }    
-		 }	 
+		 	 try {
+				throw IllegalArgumentException;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+		else {
+			Student []tmpStudent = new Student[students.length+1];
+		 	for(int i=students.length-1;i>=0;i--){
+		 		tmpStudent[i+1]=students[i];
+		    }
+		 	tmpStudent[0]=student;
+		 	students=tmpStudent; 
+		}    	 
 	}
 
 	@Override
 	public void addLast(Student student) {
-		// Add your implementation here
+		if(student==null) {
+		 	 try {
+				throw IllegalArgumentException;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
+		else {
+			Student []tmpStudent = new Student[students.length+1];
+		 	for(int i=students.length-1;i>=0;i--){
+		 		tmpStudent[i]=students[i];
+		    }
+		 	tmpStudent[tmpStudent.length-1]=student;
+		 	students=tmpStudent; 
+		}    	 
 	}
 
 	@Override
